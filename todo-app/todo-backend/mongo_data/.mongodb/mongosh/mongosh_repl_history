@@ -1,9 +1,0 @@
-exit
-db.todos.find()
-db.todos.insert({text:'testing123', done: false}) 
-show collections
-show
-use the_database
-show dbs
-.exit
-show dbs
