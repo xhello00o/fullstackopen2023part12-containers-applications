@@ -1,0 +1,83 @@
+Script started on 2023-10-19 00:09:36+08:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="120" LINES="30"]
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+[?2004h]0;xuanhao@DESKTOP-8U3KGDI: /mnt/d[01;32mxuanhao@DESKTOP-8U3KGDI[00m:[01;34m/mnt/d[00m$ docker exec -it todo-backend[K[K[K[K[K[K[K[K[K[K[K[Ka8e0331 bash
+[?2004l[?2004hroot@a8e0331fec79:/# pwd
+[?2004l/
+[?2004hroot@a8e0331fec79:/# ls
+[?2004lbin   data  docker-entrypoint-initdb.d	home	    lib    lib64   media  opt	root  sbin  sys  usr
+boot  dev   etc				js-yaml.js  lib32  libx32  mnt	  proc	run   srv   tmp  var
+[?2004hroot@a8e0331fec79:/# mongosh
+[?2004l]0;mongosh mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000Current Mongosh Log ID:	6530037338f4590b8d40576d
+Connecting to:		[1m[32mmongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.0.1[0m
+Using MongoDB:		7.0.2
+[1m[33mUsing Mongosh[0m:		2.0.1
+
+For mongosh info see: [1mhttps://docs.mongodb.com/mongodb-shell/[0m
+
+
+To help improve our products, anonymous usage data is collected and sent to MongoDB periodically (https://www.mongodb.com/legal/privacy-policy).
+You can opt-out by running the [1mdisableTelemetry()[0m command.
+
+[1G[0J [1G[1G[0Jtest> [7Gshow dbs
+Uncaught [1m[31mMongoServerError[0m: Command listDatabases requires authentication
+[1G[0Jtest> [7G
+(To exit, press Ctrl+C again or Ctrl+D or type .exit)
+[1G[0Jtest> [7Ge[1G[0Jtest> [7G.exit
+[?2004hroot@a8e0331fec79:/# mogh  ngosh -root -  example             u root   -p example
+[?2004l]0;mongosh mongodb://<credentials>@127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000Current Mongosh Log ID:	653003aaefbb39f8ab26f0fc
+Connecting to:		[1m[32mmongodb://<credentials>@127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.0.1[0m
+Using MongoDB:		7.0.2
+[1m[33mUsing Mongosh[0m:		2.0.1
+
+For mongosh info see: [1mhttps://docs.mongodb.com/mongodb-shell/[0m
+
+[1G[0J [1G[1m[33m------[0m
+   [1m[33mThe server generated these startup warnings when booting[0m
+   2023-10-18T15:11:51.890+00:00: /sys/kernel/mm/transparent_hugepage/enabled is 'always'. We suggest setting it to 'never'
+   2023-10-18T15:11:51.891+00:00: vm.max_map_count is too low
+[1m[33m------[0m
+
+[1G[0Jtest> [7Gshow dbs
+[1madmin[0m         100.00 KiB
+[1mconfig[0m        108.00 KiB
+[1mlocal[0m          72.00 KiB
+[1mthe_database[0m   56.00 KiB
+[1G[0Jtest> [7Guse the_database [1G[0Jtest> use the_database[23G
+switched to db the_database
+[1G[0Jthe_database> [15Gshow
+Uncaught [1m[31mMongoshInvalidInputError[0m: [COMMON-10001] 'undefined' is not a valid argument for "show".
+[1G[0Jthe_database> [15Gshow collectios[1G[0Jthe_database> show collectio[29Gns
+[1mtodos[0m
+[1G[0Jthe_database> [15Gdb [1G[0Jthe_database> db[17G.todos [1G[0Jthe_database> db.todos[23G.insert [1G[0Jthe_database> db.todos.insert[30G({text[33mtext[39m:[32m'[39m[32mt[39m[32me[39m[32ms[39m[32mt[39m[32mi[39m[32mn[39m[32mg[39m[32m1[39m[32m2[39m[32m3[39m[32m'[39m, d[36mdo[39mdone [1G[0Jthe_database> db.todos.insert({[33mtext[39m:[32m'testing123'[39m, done[55G:[32m'[39m[1G[0Jthe_database> db.todos.insert({[33mtext[39m:[32m'testing123'[39m, [33mdone[39m:[56G flas[1G[0Jthe_database> db.todos.insert({[33mtext[39m:[32m'testing123'[39m, [33mdone[39m: fla[60G[1G[0Jthe_database> db.todos.insert({[33mtext[39m:[32m'testing123'[39m, [33mdone[39m: fl[59G[1G[0Jthe_database> db.todos.insert({[33mtext[39m:[32m'testing123'[39m, [33mdone[39m: f[58Gals[33mfalse[39m [1G[0Jthe_database> db.todos.insert({[33mtext[39m:[32m'testing123'[39m, [33mdone[39m: [33mfalse[39m[62G}) 
+DeprecationWarning: Collection.insert() is deprecated. Use insertOne, insertMany, or bulkWrite.
+{
+  acknowledged: [33mtrue[39m,
+  insertedIds: { [32m'0'[39m: ObjectId("65300409efbb39f8ab26f0fd") }
+}
+[1G[0Jthe_database> [15Gdb.todos.find [1G[0Jthe_database> db.todos.find[28G()
+[
+  {
+    _id: ObjectId("652fe63d27229bb36b289de2"),
+    text: [32m'Write code'[39m,
+    done: [33mtrue[39m
+  },
+  {
+    _id: ObjectId("652fe63d27229bb36b289de3"),
+    text: [32m'Learn about containers'[39m,
+    done: [33mfalse[39m
+  },
+  {
+    _id: ObjectId("65300409efbb39f8ab26f0fd"),
+    text: [32m'testing123'[39m,
+    done: [33mfalse[39m
+  }
+]
+[1G[0Jthe_database> [15Gexit [1G[0Jthe_database> exit[19G
+[?2004hroot@a8e0331fec79:/# exit
+[?2004lexit
+[?2004h]0;xuanhao@DESKTOP-8U3KGDI: /mnt/d[01;32mxuanhao@DESKTOP-8U3KGDI[00m:[01;34m/mnt/d[00m$ exit
+[?2004lexit
+
+Script done on 2023-10-19 00:13:34+08:00 [COMMAND_EXIT_CODE="0"]
