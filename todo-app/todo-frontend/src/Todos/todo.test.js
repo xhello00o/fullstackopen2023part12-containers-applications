@@ -1,13 +1,14 @@
+/* eslint-disable testing-library/no-debugging-utils */
 import { Todo } from "./List";
 import {render,screen} from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
 import userEvent from '@testing-library/user-event'
-import {expect, jest, test} from '@jest/globals';
-
+import {jest,expect,test} from '@jest/globals'
 
 
 
 describe('Tests for Single Todo', () => {
+
+    
 
     const todoTrue = {
         "_id": "652fe63d27229bb36b289de2",
@@ -20,13 +21,14 @@ describe('Tests for Single Todo', () => {
         "done": false
     } 
 
-
-    const mockDelete =  jest.fn()
-    const mockSetDone =  jest.fn()
+    const mockSetDone =  jest.fn().mockName('setDone')
+    const mockDelete =  jest.fn().mockName('Delete')
+    
+    
 
     test('Correctly displayed the True todo', () => {
 
-        render(<Todo todo={todoTrue} onClickComplete={mockSetDone} onClickDelete={mockDelete}/>)  
+        render(<Todo todo={todoTrue} onClickComplete={()=>mockSetDone} onClickDelete={()=>mockDelete}/>)  
         
         const todoText = screen.queryByText(todoTrue.text)
         const doneText = screen.queryByText('This todo is done')
@@ -39,7 +41,7 @@ describe('Tests for Single Todo', () => {
 
     test('Correctly displayed the False todo', () => {
 
-        render(<Todo todo={todoFalse} onClickComplete={mockSetDone} onClickDelete={mockDelete}/>)  
+        render(<Todo todo={todoFalse} onClickComplete={()=>mockSetDone} onClickDelete={()=>mockDelete}/>)  
         
         const todoText = screen.queryByText(todoTrue.text)
         const notDoneText = screen.queryByText('This todo is not done')
@@ -51,30 +53,32 @@ describe('Tests for Single Todo', () => {
     } )
 
     test('Delete Button work properly',async()=> {
-        
-
-        render(<Todo todo={todoFalse} onClickComplete={mockSetDone} onClickDelete={mockDelete}/>) 
-        
         const user = userEvent.setup()
-        const deleteButton = screen.getByRole('button', {name:'Delete'})
-        
-        await user.click(deleteButton)
 
-        expect(mockDelete.mock.calls).toHaveLength(1)
+        
+        
+
+        render(<Todo todo={todoFalse} onClickComplete={()=>mockSetDone} onClickDelete={()=>mockDelete}/>) 
+        screen.debug()
+        
+        const deleteButton = screen.getByRole('button', {name:'Delete'})
+        await user.click(deleteButton)
+        expect(mockDelete).toHaveBeenCalledTimes(1)
+        expect(mockSetDone).not.toBeCalled()
         
     })
 
     test('Set as Done Button work properly',async()=> {
-        
-
-        render(<Todo todo={todoFalse} onClickComplete={mockSetDone} onClickDelete={mockDelete}/>) 
-        
         const user = userEvent.setup()
+        mockDelete.mockReset()
+
+        render(<Todo todo={todoFalse} onClickComplete={()=>mockSetDone} onClickDelete={()=>mockDelete}/>) 
+        screen.debug()
+        
         const setDoneButton = screen.getByRole('button', {name:'Set as done'})
         
         await user.click(setDoneButton)
-
-        expect(mockSetDone.mock.calls).toHaveLength(1)
+        expect(mockSetDone).toHaveBeenCalledTimes(1)
         
     })
 } )

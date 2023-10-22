@@ -23,6 +23,7 @@ router.post('/', async (req, res) => {
     text: req.body.text,
     done: false
   })
+  console.log(todo)
   let added_todos = await redis.getAsync('added_todos')
   if (added_todos) {
     added_todos = parseInt(added_todos) + 1 

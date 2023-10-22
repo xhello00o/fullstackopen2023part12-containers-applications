@@ -1,8 +1,7 @@
 import React from 'react'
 
-export const Todo = ({todo,onClickComplete,onClickDelete}) => {
 
-  console.log(typeof onClickComplete, typeof onClickDelete)
+export const Todo = ({todo,onClickComplete,onClickDelete}) => {
   const doneInfo = (
     <>
       <span>This todo is done</span>
@@ -37,16 +36,17 @@ export const Todo = ({todo,onClickComplete,onClickDelete}) => {
 const TodoList = ({ todos, deleteTodo, completeTodo }) => {
   const onClickDelete = (todo) => () => {
     deleteTodo(todo)
+    console.log('delete')
   }
 
   const onClickComplete = (todo) => () => {
+    console.log('complete')
     completeTodo(todo)
   }
 
   return (
     <>
       {todos.map(todo => {
-        
 
         return (
           <Todo todo={todo} onClickComplete={onClickComplete} onClickDelete={onClickDelete}/>
