@@ -17,7 +17,7 @@ export const Todo = ({todo,onClickComplete,onClickDelete}) => {
         This todo is not done
       </span>
       <span>
-        <button onClick={onClickDelete(todo)}> Delete </button>
+        <button onClick={onClickDelete(todo)} > Delete </button>
         <button onClick={onClickComplete(todo)}> Set as done </button>
       </span>
     </>

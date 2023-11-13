@@ -20,7 +20,7 @@ services:
     volumes:
       - ./redis_data:/data
 
-  backend:
+  server:
     image: todo-backend-dev
     build: 
       context: .
